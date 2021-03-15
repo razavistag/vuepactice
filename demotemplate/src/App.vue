@@ -1,60 +1,58 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
+    <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+        <v-btn @click.stop="drawer = !drawer" text
+          ><v-icon>mdi-menu</v-icon></v-btn
+        >
+        Demo Frontend
       </div>
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
+      <v-btn href="/" text>
+        <span class="mr-2">Home</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import HelloWorld from "./components/HelloWorld";
+// import offline from "v-offline";
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
     HelloWorld,
+    // offline,
   },
 
   data: () => ({
-    //
+    drawer: true,
+    group: null,
   }),
+  computed: {
+    networkStatus() {
+      return this.isOnline ? "My network is fine" : "I am offline";
+    },
+  },
+  mounted() {
+    // console.log()
+    setInterval(function() {
+     console.log('test')
+    }, 2000);
+    if (this.isOnline) {
+      // this.$toast.success("connected");
+    } else {
+      // this.$toast.error("your connection is Lost");
+    }
+  },
 };
 </script>
