@@ -45,9 +45,9 @@ export default {
   },
   mounted() {
     // console.log()
-    setInterval(function() {
-     console.log('test')
-    }, 2000);
+    // setInterval(function() {
+    //  console.log('test')
+    // }, 2000);
     if (this.isOnline) {
       // this.$toast.success("connected");
     } else {

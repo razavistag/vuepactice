@@ -7,6 +7,7 @@ import vuetify from './plugins/vuetify';
 import VueOffline from 'vue-offline'
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
+import browserDetect from "vue-browser-detect-plugin";
 
 Vue.config.productionTip = false
 const options = {
@@ -14,6 +15,7 @@ const options = {
 };
 Vue.use(VueOffline)
 Vue.use(Toast, options);
+Vue.use(browserDetect);
 
 new Vue({
   router,
@@ -21,3 +23,4 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
+
