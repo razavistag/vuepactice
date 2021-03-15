@@ -16,10 +16,9 @@
 
     <v-alert
       dense
-      
       type="error"
-       style="z-index:10; top:-50px"
-       dismissible
+      style="z-index:10; top:-50px"
+      dismissible
       v-if="browserSupportVersionAlert"
     >
       Browser <strong>update</strong> required.
@@ -28,7 +27,13 @@
     <v-container>
       <v-row>
         <v-col cols="12" sm="6" md="3">
-          <v-text-field label="Name" outlined></v-text-field>
+          <v-text-field
+            label="Name"
+            v-model="price"
+            outlined
+            @input="txtChange"
+          ></v-text-field>
+          <h4>{{ strPrice }}</h4>
         </v-col>
 
         <v-col cols="12" sm="6" md="3">
@@ -63,11 +68,11 @@ export default {
       browser_version: null,
       browserSupportAlert: null,
       browserSupportVersionAlert: null,
-      latest_Firefox_v : 86, //86 latest
-      latest_Chrome_m_v : 89, //89 latest
-      latest_Chrome_d_v : 89, 
-
-
+      latest_Firefox_v: 86, //86 latest
+      latest_Chrome_m_v: 89, //89 latest
+      latest_Chrome_d_v: 89,
+      price: 0,
+      strPrice: 0,
     };
   },
 
@@ -91,7 +96,7 @@ export default {
     }
 
     if (this.browser == "Chrome Mobile") {
-      if (this.browser_version  > this.latest_Chrome_m_v) {
+      if (this.browser_version > this.latest_Chrome_m_v) {
         this.browserSupportVersionAlert = true;
         console.log("indicate update " + this.browser_version);
       } else {
@@ -99,8 +104,8 @@ export default {
       }
     }
 
-     if (this.browser == "Chrome Desktop") {
-      if (this.browser_version  > this.latest_Chrome_d_v) {
+    if (this.browser == "Chrome Desktop") {
+      if (this.browser_version > this.latest_Chrome_d_v) {
         this.browserSupportVersionAlert = true;
         console.log("indicate update " + this.browser_version);
       } else {
@@ -108,7 +113,7 @@ export default {
       }
     }
 
-     if (this.browser == "Firefox") {
+    if (this.browser == "Firefox") {
       if (this.browser_version > this.latest_Firefox_v) {
         this.browserSupportVersionAlert = true;
         console.log("indicate update " + this.browser_version);
@@ -127,6 +132,13 @@ export default {
       } else {
         this.$toast.success("post");
       }
+    },
+    txtChange($e) {
+      var numeral = require("numeral");
+      let pr = $e;
+      var number = numeral(pr);
+      this.price = number.format();
+      this.strPrice = number.value();
     },
   },
 };
